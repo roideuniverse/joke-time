@@ -1,4 +1,4 @@
-package com.example;
+package com.joketimelib;
 
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
@@ -28,7 +28,7 @@ public class JokeTime
      */
     public static String loadJoke()
     {
-        return new JokeLoadTask().call();
+        return new com.joketimelib.JokeLoadTask().call();
     }
 
     /**
@@ -37,7 +37,7 @@ public class JokeTime
      */
     public static void loadJoke(JokeLoadCallback jokeLoadCallback)
     {
-        JokeLoadTask task = new JokeLoadTask(jokeLoadCallback);
+        com.joketimelib.JokeLoadTask task = new com.joketimelib.JokeLoadTask(jokeLoadCallback);
         getInstance().mExecutorService.submit(task);
     }
 }

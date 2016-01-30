@@ -1,4 +1,4 @@
-package com.example;
+package com.joketimelib;
 
 /**
  * Created by roide on 1/28/16.
