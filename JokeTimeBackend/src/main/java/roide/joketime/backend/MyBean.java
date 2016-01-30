@@ -1,15 +1,20 @@
 package roide.joketime.backend;
 
-/** The object model for the data we are sending through endpoints */
-public class MyBean {
+/**
+ * The object model for the data we are sending through endpoints
+ */
+public class MyBean
+{
 
     private String myData;
 
-    public String getData() {
+    public String getData()
+    {
         return myData;
     }
 
-    public void setData(String data) {
+    public void setData(String data)
+    {
         myData = data;
     }
 }
