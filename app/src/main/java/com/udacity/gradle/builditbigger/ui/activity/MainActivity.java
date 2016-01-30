@@ -7,12 +7,12 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Toast;
 
+import com.example.JokeTime;
 import com.udacity.gradle.builditbigger.R;
 
 
 public class MainActivity extends ActionBarActivity
 {
-
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
@@ -46,10 +46,8 @@ public class MainActivity extends ActionBarActivity
         return super.onOptionsItemSelected(item);
     }
 
-    public void tellJoke(View view)
+    public void tellJoke(final View view)
     {
-        Toast.makeText(this, "derp", Toast.LENGTH_SHORT).show();
+        Toast.makeText(MainActivity.this, JokeTime.loadJoke(), Toast.LENGTH_SHORT).show();
     }
-
-
 }
