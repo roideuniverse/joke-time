@@ -5,8 +5,8 @@ import android.support.v7.app.ActionBarActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.Toast;
 
+import com.joketime.android.JokeShowActivity;
 import com.joketimelib.JokeTime;
 import com.udacity.gradle.builditbigger.R;
 
@@ -48,6 +48,6 @@ public class MainActivity extends ActionBarActivity
 
     public void tellJoke(final View view)
     {
-        Toast.makeText(MainActivity.this, JokeTime.loadJoke(), Toast.LENGTH_SHORT).show();
+        JokeShowActivity.showJoke(JokeTime.loadJoke(), getApplicationContext());
     }
 }
