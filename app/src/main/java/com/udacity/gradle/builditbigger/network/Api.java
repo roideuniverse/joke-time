@@ -1,4 +1,4 @@
-package com.udacity.gradle.builditbigger.ui.network;
+package com.udacity.gradle.builditbigger.network;
 
 import com.google.api.client.extensions.android.http.AndroidHttp;
 import com.google.api.client.extensions.android.json.AndroidJsonFactory;

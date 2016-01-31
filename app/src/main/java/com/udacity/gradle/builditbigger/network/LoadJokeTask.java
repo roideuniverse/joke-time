@@ -1,4 +1,4 @@
-package com.udacity.gradle.builditbigger.ui.network;
+package com.udacity.gradle.builditbigger.network;
 
 import android.os.AsyncTask;
 
