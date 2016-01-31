@@ -5,6 +5,7 @@ import android.support.v7.app.ActionBarActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ProgressBar;
 
 import com.google.android.gms.ads.AdListener;
 import com.google.android.gms.ads.AdRequest;
@@ -18,6 +19,7 @@ import com.udacity.gradle.builditbigger.util.Util;
 public class MainActivity extends ActionBarActivity
 {
     private InterstitialAd mInterstitialAd;
+    private ProgressBar mProgressBar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -101,6 +103,7 @@ public class MainActivity extends ActionBarActivity
 
     private void showJoke()
     {
+        showProgressBar(true);
         new LoadJokeTask(new LoadJokeTask.OnJokeLoadedCallback()
         {
             @Override
@@ -108,9 +111,33 @@ public class MainActivity extends ActionBarActivity
             {
                 if(! MainActivity.this.isFinishing())
                 {
+                    showProgressBar(false);
                     JokeShowActivity.showJoke(joke, getApplicationContext());
                 }
             }
         }).execute();
+    }
+
+    private void showProgressBar(final boolean show)
+    {
+        if(mProgressBar == null)
+        {
+            mProgressBar = (ProgressBar) findViewById(R.id.progressBar);
+        }
+        mProgressBar.post(new Runnable()
+        {
+            @Override
+            public void run()
+            {
+                if(show)
+                {
+                    mProgressBar.setVisibility(View.VISIBLE);
+                }
+                else
+                {
+                    mProgressBar.setVisibility(View.GONE);
+                }
+            }
+        });
     }
 }
