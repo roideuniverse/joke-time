@@ -1,9 +1,3 @@
-/*
-   For step-by-step instructions on connecting your Android application to this backend module,
-   see "App Engine Java Endpoints Module" template documentation at
-   https://github.com/GoogleCloudPlatform/gradle-appengine-templates/tree/master/HelloEndpoints
-*/
-
 package roide.joketime.backend;
 
 import com.google.api.server.spi.config.Api;
@@ -14,10 +8,10 @@ import com.joketimelib.JokeTime;
 import javax.inject.Named;
 
 /**
- * An endpoint class we are exposing
+ * Created by roide on 1/31/16.
  */
 @Api(
-        name = "myApi",
+        name = "jokeTimeApi",
         version = "v1",
         namespace = @ApiNamespace(
                 ownerDomain = "backend.joketime.roide",
@@ -25,7 +19,7 @@ import javax.inject.Named;
                 packagePath = ""
         )
 )
-public class MyEndpoint
+public class JokeTimeEndpoint
 {
     /**
      * A simple endpoint method that takes a name and says Hi back
@@ -34,8 +28,15 @@ public class MyEndpoint
     public MyBean sayHi(@Named("name") String name)
     {
         MyBean response = new MyBean();
-        response.setData(JokeTime.loadJoke());
+        response.setData("Hello " + name);
         return response;
     }
 
+    @ApiMethod(name = "getJoke", httpMethod = ApiMethod.HttpMethod.GET, path = "getJoke")
+    public JokeBean getJoke()
+    {
+        JokeBean response = new JokeBean();
+        response.setJoke(JokeTime.loadJoke());
+        return response;
+    }
 }

@@ -8,6 +8,7 @@ import android.view.View;
 
 import com.joketime.android.JokeShowActivity;
 import com.udacity.gradle.builditbigger.R;
+import com.udacity.gradle.builditbigger.ui.network.LoadJokeTask;
 
 
 public class MainActivity extends ActionBarActivity
@@ -47,6 +48,16 @@ public class MainActivity extends ActionBarActivity
 
     public void tellJoke(final View view)
     {
-        JokeShowActivity.showJoke("heya", getApplicationContext());
+        new LoadJokeTask(new LoadJokeTask.OnJokeLoadedCallback()
+        {
+            @Override
+            public void onJokeLoaded(String joke)
+            {
+                if(! MainActivity.this.isFinishing())
+                {
+                    JokeShowActivity.showJoke(joke, getApplicationContext());
+                }
+            }
+        }).execute();
     }
 }
