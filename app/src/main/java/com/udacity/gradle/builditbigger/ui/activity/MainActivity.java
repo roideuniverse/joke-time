@@ -8,7 +8,7 @@ import android.view.View;
 
 import com.joketime.android.JokeShowActivity;
 import com.udacity.gradle.builditbigger.R;
-import com.udacity.gradle.builditbigger.ui.network.LoadJokeTask;
+import com.udacity.gradle.builditbigger.network.LoadJokeTask;
 
 
 public class MainActivity extends ActionBarActivity
