@@ -8,6 +8,7 @@ import android.view.ViewGroup;
 
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdView;
+import com.udacity.gradle.builditbigger.BuildConfig;
 import com.udacity.gradle.builditbigger.R;
 
 
@@ -26,8 +27,22 @@ public class MainActivityFragment extends Fragment
                              Bundle savedInstanceState)
     {
         View root = inflater.inflate(R.layout.fragment_main, container, false);
+        if(checkIsFreeFlavor())
+        {
+            showAds(root);
+        }
+        return root;
+    }
 
+    private boolean checkIsFreeFlavor()
+    {
+        return BuildConfig.FLAVOR.equals("free");
+    }
+
+    private void showAds(View root)
+    {
         AdView mAdView = (AdView) root.findViewById(R.id.adView);
+        mAdView.setVisibility(View.VISIBLE);
         // Create an ad request. Check logcat output for the hashed device ID to
         // get test ads on a physical device. e.g.
         // "Use AdRequest.Builder.addTestDevice("ABCDEF012345") to get test ads on this device."
@@ -35,6 +50,5 @@ public class MainActivityFragment extends Fragment
                 .addTestDevice(AdRequest.DEVICE_ID_EMULATOR)
                 .build();
         mAdView.loadAd(adRequest);
-        return root;
     }
 }
