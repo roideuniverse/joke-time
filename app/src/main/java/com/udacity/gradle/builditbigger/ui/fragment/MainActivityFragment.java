@@ -8,8 +8,8 @@ import android.view.ViewGroup;
 
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdView;
-import com.udacity.gradle.builditbigger.BuildConfig;
 import com.udacity.gradle.builditbigger.R;
+import com.udacity.gradle.builditbigger.util.Util;
 
 
 /**
@@ -27,16 +27,11 @@ public class MainActivityFragment extends Fragment
                              Bundle savedInstanceState)
     {
         View root = inflater.inflate(R.layout.fragment_main, container, false);
-        if(checkIsFreeFlavor())
+        if(Util.checkIsFreeFlavor())
         {
             showAds(root);
         }
         return root;
-    }
-
-    private boolean checkIsFreeFlavor()
-    {
-        return BuildConfig.FLAVOR.equals("free");
     }
 
     private void showAds(View root)

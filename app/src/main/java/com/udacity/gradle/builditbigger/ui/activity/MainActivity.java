@@ -6,18 +6,25 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 
+import com.google.android.gms.ads.AdListener;
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.InterstitialAd;
 import com.joketime.android.JokeShowActivity;
 import com.udacity.gradle.builditbigger.R;
 import com.udacity.gradle.builditbigger.network.LoadJokeTask;
+import com.udacity.gradle.builditbigger.util.Util;
 
 
 public class MainActivity extends ActionBarActivity
 {
+    private InterstitialAd mInterstitialAd;
+
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        prepareInterstitial();
     }
 
 
@@ -47,6 +54,52 @@ public class MainActivity extends ActionBarActivity
     }
 
     public void tellJoke(final View view)
+    {
+        if(Util.checkIsFreeFlavor())
+        {
+            if(mInterstitialAd.isLoaded())
+            {
+                mInterstitialAd.show();
+            }
+            else
+            {
+                showJoke();
+            }
+        }
+        else
+        {
+            showJoke();
+        }
+    }
+
+    private void prepareInterstitial()
+    {
+        if(Util.checkIsFreeFlavor())
+        {
+            mInterstitialAd = new InterstitialAd(this);
+            mInterstitialAd.setAdUnitId("ca-app-pub-3940256099942544/1033173712");
+            mInterstitialAd.setAdListener(new AdListener()
+            {
+                @Override
+                public void onAdClosed()
+                {
+                    super.onAdClosed();
+                    showJoke();
+                    requestInterstitial();
+                }
+            });
+            requestInterstitial();
+        }
+    }
+
+    private void requestInterstitial()
+    {
+        AdRequest adRequest = new AdRequest.Builder()
+                .build();
+        mInterstitialAd.loadAd(adRequest);
+    }
+
+    private void showJoke()
     {
         new LoadJokeTask(new LoadJokeTask.OnJokeLoadedCallback()
         {
