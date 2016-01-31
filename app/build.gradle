@@ -26,8 +26,7 @@ dependencies {
     compile 'com.android.support:multidex:1.0.0'
     // Added for AdMob
     compile 'com.google.android.gms:play-services:8.4.0'
-    //JokeTime library
-    compile project(':joketimelib')
+
     //JokeTime Android Library
     compile project(':joketimeandroidlib')
     //JokeTime Backend
