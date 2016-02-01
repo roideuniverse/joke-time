@@ -17,3 +17,16 @@ allprojects {
         jcenter()
     }
 }
+
+task ktestTask {
+    println "k--testTask--kaushik"
+    def engineStart = tasks.getByPath(':JokeTimeBackend:appengineRun')
+    def androidTest = tasks.getByPath(':app:connectedAndroidTest')
+    def engineStop = tasks.getByPath(':JokeTimeBackend:appengineStop')
+
+    dependsOn engineStart
+    dependsOn androidTest
+    dependsOn engineStop
+    androidTest.mustRunAfter engineStart
+    engineStop.mustRunAfter androidTest
+}
