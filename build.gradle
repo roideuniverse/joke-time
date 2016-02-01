@@ -18,8 +18,11 @@ allprojects {
     }
 }
 
+project(':JokeTimeBackend').afterEvaluate { jokeTimeBackend ->
+    jokeTimeBackend.extensions.appengine.daemon = true
+}
+
 task ktestTask {
-    println "k--testTask--kaushik"
     def engineStart = tasks.getByPath(':JokeTimeBackend:appengineRun')
     def androidTest = tasks.getByPath(':app:connectedAndroidTest')
     def engineStop = tasks.getByPath(':JokeTimeBackend:appengineStop')
@@ -29,4 +32,8 @@ task ktestTask {
     dependsOn engineStop
     androidTest.mustRunAfter engineStart
     engineStop.mustRunAfter androidTest
+}
+
+gradle.taskGraph.afterTask {Task task ->
+    println "after::${task}::"
 }
