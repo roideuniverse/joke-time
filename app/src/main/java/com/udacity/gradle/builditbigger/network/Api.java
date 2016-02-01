@@ -22,7 +22,7 @@ public class Api
         {
             JokeTimeApi.Builder builder = new JokeTimeApi.Builder(AndroidHttp
                     .newCompatibleTransport(), new AndroidJsonFactory(), null)
-                    .setRootUrl("https://nanodegreejoketime.appspot.com/_ah/api/")
+                    .setRootUrl("http://10.0.2.2:8080/_ah/api/")
                     .setGoogleClientRequestInitializer(new GoogleClientRequestInitializer()
                     {
                         @Override

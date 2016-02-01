@@ -6,6 +6,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ProgressBar;
+import android.widget.Toast;
 
 import com.google.android.gms.ads.AdListener;
 import com.google.android.gms.ads.AdRequest;
@@ -112,7 +113,14 @@ public class MainActivity extends ActionBarActivity
                 if(! MainActivity.this.isFinishing())
                 {
                     showProgressBar(false);
-                    JokeShowActivity.showJoke(joke, getApplicationContext());
+                    if(joke != null)
+                    {
+                        JokeShowActivity.showJoke(joke, getApplicationContext());
+                    }
+                    else
+                    {
+                        Toast.makeText(getApplicationContext(), "Error", Toast.LENGTH_SHORT).show();
+                    }
                 }
             }
         }).execute();
