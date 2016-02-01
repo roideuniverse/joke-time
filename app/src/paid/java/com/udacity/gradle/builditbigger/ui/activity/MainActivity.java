@@ -8,18 +8,12 @@ import android.view.View;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
-import com.google.android.gms.ads.AdListener;
-import com.google.android.gms.ads.AdRequest;
-import com.google.android.gms.ads.InterstitialAd;
 import com.joketime.android.JokeShowActivity;
 import com.udacity.gradle.builditbigger.R;
 import com.udacity.gradle.builditbigger.network.LoadJokeTask;
-import com.udacity.gradle.builditbigger.util.Util;
-
 
 public class MainActivity extends ActionBarActivity
 {
-    private InterstitialAd mInterstitialAd;
     private ProgressBar mProgressBar;
 
     @Override
@@ -27,7 +21,6 @@ public class MainActivity extends ActionBarActivity
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        prepareInterstitial();
     }
 
 
@@ -58,48 +51,7 @@ public class MainActivity extends ActionBarActivity
 
     public void tellJoke(final View view)
     {
-        if(Util.checkIsFreeFlavor())
-        {
-            if(mInterstitialAd.isLoaded())
-            {
-                mInterstitialAd.show();
-            }
-            else
-            {
-                showJoke();
-            }
-        }
-        else
-        {
-            showJoke();
-        }
-    }
-
-    private void prepareInterstitial()
-    {
-        if(Util.checkIsFreeFlavor())
-        {
-            mInterstitialAd = new InterstitialAd(this);
-            mInterstitialAd.setAdUnitId("ca-app-pub-3940256099942544/1033173712");
-            mInterstitialAd.setAdListener(new AdListener()
-            {
-                @Override
-                public void onAdClosed()
-                {
-                    super.onAdClosed();
-                    showJoke();
-                    requestInterstitial();
-                }
-            });
-            requestInterstitial();
-        }
-    }
-
-    private void requestInterstitial()
-    {
-        AdRequest adRequest = new AdRequest.Builder()
-                .build();
-        mInterstitialAd.loadAd(adRequest);
+        showJoke();
     }
 
     private void showJoke()
@@ -119,7 +71,7 @@ public class MainActivity extends ActionBarActivity
                     }
                     else
                     {
-                        Toast.makeText(getApplicationContext(), "Error", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getApplicationContext(), "Error", Toast.LENGTH_LONG).show();
                     }
                 }
             }
